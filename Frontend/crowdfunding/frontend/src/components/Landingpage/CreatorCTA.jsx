@@ -1,7 +1,14 @@
 import React from 'react';
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const CreatorCTA = () => {
+    const navigate = useNavigate();
+
+    const handleStartProject = () => {
+        navigate('/creators');
+    };
+
     return (
         <div id="start-project" className="py-24 relative overflow-hidden bg-gradient-to-br from-blue-50 to-purple-50">
             <div className="absolute inset-0 overflow-hidden">
@@ -107,6 +114,7 @@ const CreatorCTA = () => {
                             boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)"
                         }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={handleStartProject}
                     >
                         Start Your Project Today
                     </motion.button>

@@ -14,7 +14,6 @@ const FilterBar = ({ filters, setFilters }) => {
 
   return (
     <div className="flex items-center gap-4 flex-wrap md:flex-nowrap">
-      {/* Category Filter */}
       <select
         value={filters.category}
         onChange={(e) => setFilters({ ...filters, category: e.target.value })}
@@ -26,8 +25,6 @@ const FilterBar = ({ filters, setFilters }) => {
           </option>
         ))}
       </select>
-
-      {/* Sort Filter */}
       <select
         value={filters.sort}
         onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
@@ -39,8 +36,6 @@ const FilterBar = ({ filters, setFilters }) => {
           </option>
         ))}
       </select>
-
-      {/* Status Filters */}
       <div className="flex gap-2">
         <button
           onClick={() => setFilters({ ...filters, status: 'all' })}

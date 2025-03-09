@@ -51,13 +51,9 @@ const Comments = ({ projectId }) => {
       ]
     }
   ]);
-
-  // Add useEffect to fetch comments when projectId changes
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        // Here you would fetch comments from your API using projectId
-        // For now, we'll use the mock data already in state
         console.log(`Fetching comments for project ${projectId}`);
       } catch (error) {
         console.error('Error fetching comments:', error);
@@ -68,7 +64,7 @@ const Comments = ({ projectId }) => {
     fetchComments();
   }, [projectId]);
 
-  const [isBacker, setIsBacker] = useState(false); // This would come from your auth context
+  const [isBacker, setIsBacker] = useState(false); 
   const [newComment, setNewComment] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
   const [replyContent, setReplyContent] = useState('');
@@ -119,7 +115,7 @@ const Comments = ({ projectId }) => {
 
     const newCommentObj = {
       id: Date.now(),
-      author: "Current User", // This would come from your auth context
+      author: "Current User", 
       avatar: "https://via.placeholder.com/40",
       content: newComment,
       timeAgo: "just now",
@@ -145,7 +141,7 @@ const Comments = ({ projectId }) => {
 
     const newReply = {
       id: Date.now(),
-      author: "Current User", // This would come from your auth context
+      author: "Current User", 
       avatar: "https://via.placeholder.com/40",
       content: replyContent,
       timeAgo: "just now",
@@ -173,12 +169,9 @@ const Comments = ({ projectId }) => {
 
   return (
     <div className="space-y-6">
-      {/* Backer Only Notice */}
       <div className="bg-gray-50 p-4 rounded-lg text-center text-gray-600">
         Only backers can post comments.
       </div>
-
-      {/* Comment Input */}
       {isBacker ? (
         <div className="space-y-4">
           <textarea
@@ -209,8 +202,6 @@ const Comments = ({ projectId }) => {
           </motion.button>
         </div>
       )}
-
-      {/* Comments List */}
       <div className="space-y-6">
         {comments.map((comment) => (
           <motion.div
@@ -219,7 +210,6 @@ const Comments = ({ projectId }) => {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            {/* Main Comment */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex items-start space-x-4">
                 <img
@@ -260,8 +250,6 @@ const Comments = ({ projectId }) => {
                 </div>
               </div>
             </div>
-
-            {/* Reply Input */}
             <AnimatePresence>
               {replyingTo === comment.id && (
                 <motion.div
@@ -298,8 +286,6 @@ const Comments = ({ projectId }) => {
                 </motion.div>
               )}
             </AnimatePresence>
-
-            {/* Replies */}
             {comment.replies.length > 0 && (
               <div className="ml-12 space-y-4">
                 {comment.replies.map((reply) => (

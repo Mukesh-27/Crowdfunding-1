@@ -40,7 +40,7 @@ const Basics = () => {
     Crafts: ['Knitting', 'Woodworking'],
     Dance: ['Ballet', 'Hip Hop'],
     Design: ['Graphic Design', 'Interior Design'],
-    // Add more subcategories as needed
+    
   };
 
   return (

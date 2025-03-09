@@ -6,7 +6,6 @@ import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { toast } from 'react-hot-toast';
 
 const Updates = () => {
-  // State management
   const [updates, setUpdates] = useState([
     {
       id: 1,
@@ -108,8 +107,6 @@ const Updates = () => {
   const [showComments, setShowComments] = useState({});
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-
-  // Handle like button click
   const handleLike = useCallback((updateId) => {
     setUpdates(prevUpdates => prevUpdates.map(update => {
       if (update.id === updateId) {
@@ -122,14 +119,10 @@ const Updates = () => {
       return update;
     }));
   }, []);
-
-  // Handle follow/unfollow
   const handleFollowToggle = () => {
     setIsFollowing(!isFollowing);
     toast.success(isFollowing ? 'Unfollowed project updates' : 'Following project updates');
   };
-
-  // Handle share
   const handleShare = async (updateId) => {
     try {
       const update = updates.find(u => u.id === updateId);
@@ -140,7 +133,7 @@ const Updates = () => {
           url: window.location.href,
         });
       } else {
-        // Fallback for browsers that don't support native sharing
+        
         await navigator.clipboard.writeText(window.location.href);
         toast.success('Link copied to clipboard!');
       }
@@ -148,23 +141,18 @@ const Updates = () => {
       toast.error('Failed to share update');
     }
   };
-
-  // Handle comment section toggle
   const handleCommentToggle = (updateId) => {
     setShowComments(prev => ({
       ...prev,
       [updateId]: !prev[updateId]
     }));
   };
-
-  // Load more updates
+  
   const handleLoadMore = async () => {
     setLoading(true);
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       setPage(prev => prev + 1);
-      // Here you would typically fetch more updates from your API
       toast.success('More updates loaded');
     } catch (error) {
       toast.error('Failed to load more updates');
@@ -181,7 +169,7 @@ const Updates = () => {
         transition={{ duration: 0.5 }}
         className="space-y-8"
       >
-        {/* Updates Header */}
+      
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Project Updates</h1>
           <motion.button
@@ -198,8 +186,6 @@ const Updates = () => {
             <span>{isFollowing ? 'Following' : 'Follow updates'}</span>
           </motion.button>
         </div>
-
-        {/* Updates List */}
         <AnimatePresence>
           {updates.map((update) => (
             <motion.div
@@ -210,7 +196,6 @@ const Updates = () => {
               transition={{ duration: 0.5 }}
               className="bg-white rounded-lg shadow-sm overflow-hidden"
             >
-              {/* Update Header */}
               <div className="border-b border-gray-100 p-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden">
@@ -236,16 +221,13 @@ const Updates = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Update Content */}
               <div className="p-6">
                 <div 
                   className="prose max-w-none"
                   dangerouslySetInnerHTML={{ __html: update.content }}
                 />
               </div>
-
-              {/* Update Footer */}
+              
               <div className="border-t border-gray-100 p-6">
                 <div className="flex items-center space-x-6">
                   <motion.button
@@ -278,8 +260,6 @@ const Updates = () => {
                     <span>Share</span>
                   </motion.button>
                 </div>
-
-                {/* Comments Section */}
                 <AnimatePresence>
                   {showComments[update.id] && (
                     <motion.div
@@ -289,7 +269,6 @@ const Updates = () => {
                       transition={{ duration: 0.3 }}
                       className="mt-6 border-t border-gray-100 pt-6"
                     >
-                      {/* Add your comments component here */}
                       <div className="space-y-4">
                         <textarea
                           placeholder="Write a comment..."
@@ -307,8 +286,6 @@ const Updates = () => {
             </motion.div>
           ))}
         </AnimatePresence>
-
-        {/* Load More Updates Button */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}

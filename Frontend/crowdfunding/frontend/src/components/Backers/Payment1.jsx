@@ -21,11 +21,8 @@ const Payment1 = () => {
   const [rememberPayment, setRememberPayment] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showPaymentSection, setShowPaymentSection] = useState(false);
-
-  // Fetch project details
   const [project, setProject] = useState(null);
   useEffect(() => {
-    // Mock fetch project data
     setProject({
       title: "Ancient Hellas Illustrated Book",
       creator: "Tyler Miles Lockett",
@@ -99,10 +96,7 @@ const Payment1 = () => {
     
     setIsProcessing(true);
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real application, you would send this data to your backend
       const paymentData = {
         cardNumber,
         expiryDate,
@@ -167,14 +161,12 @@ const Payment1 = () => {
 
   const handlePledgeClick = () => {
     setShowPaymentSection(true);
-    // Smooth scroll to payment section
     document.getElementById('payment-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
-        {/* Back Button */}
         <motion.button
           onClick={() => {
             if (showPaymentSection) {
@@ -189,8 +181,6 @@ const Payment1 = () => {
           <FontAwesomeIcon icon={faArrowLeft} className="mr-2 group-hover:transform group-hover:-translate-x-1 transition-transform" />
           {showPaymentSection ? 'Back to rewards' : 'Back to project'}
         </motion.button>
-
-        {/* Project Header */}
         {project && (
           <motion.div 
             initial={{ opacity: 0, y: -20 }}
@@ -210,8 +200,6 @@ const Payment1 = () => {
             </div>
           </motion.div>
         )}
-
-        {/* Navigation Breadcrumb */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -244,8 +232,6 @@ const Payment1 = () => {
             </React.Fragment>
           ))}
         </motion.div>
-
-        {/* Main Content */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -260,8 +246,6 @@ const Payment1 = () => {
               <motion.p variants={itemVariants} className="text-gray-600 mb-8">
                 Pick which reward you&apos;d like to pledge for
               </motion.p>
-
-              {/* Pledge Without Reward */}
               <motion.div
                 variants={itemVariants}
                 className="border border-gray-200 rounded-lg p-6 mb-8 hover:border-green-500 transition-colors"
@@ -305,8 +289,6 @@ const Payment1 = () => {
                   </motion.button>
                 </div>
               </motion.div>
-
-              {/* Available Rewards */}
               <motion.div variants={itemVariants} className="mb-8">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-semibold">Available rewards</h2>
@@ -325,8 +307,6 @@ const Payment1 = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Reward Cards */}
                 <div className="space-y-6">
                   {rewards.map((reward) => (
                     <motion.div
@@ -402,7 +382,6 @@ const Payment1 = () => {
             </>
           ) : (
             <div id="payment-section">
-              {/* Confirm Payment Method */}
               <motion.div variants={itemVariants} className="mb-8">
                 <h2 className="text-3xl font-bold mb-6">Confirm your payment method</h2>
                 <p className="text-gray-600 mb-4">
@@ -493,8 +472,6 @@ const Payment1 = () => {
                     </label>
                   </div>
                 </div>
-
-                {/* Summary and Confirmation */}
                 <div className="mt-8 bg-white rounded-lg shadow-sm p-6">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-gray-700">Pledge without a reward</span>
@@ -549,8 +526,6 @@ const Payment1 = () => {
               </motion.div>
             </div>
           )}
-
-          {/* FAQ Section - only show in payment view */}
           {showPaymentSection && (
             <>
               <motion.div variants={itemVariants} className="mb-8">
@@ -591,8 +566,6 @@ const Payment1 = () => {
                   ))}
                 </div>
               </motion.div>
-
-              {/* Information Notice */}
               <motion.div
                 variants={itemVariants}
                 className="bg-gray-50 rounded-lg p-6"

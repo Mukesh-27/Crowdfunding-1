@@ -18,29 +18,26 @@ const Chat = () => {
     const handleSendMessage = async () => {
         if (!message) return;
 
-        // Add user message to chat history
         const userMessage = { role: 'user', content: message };
         setChatHistory((prev) => [...prev, userMessage]);
-
-        // Clear the input
         setMessage('');
-        
-        // Show typing indicator
         setIsTyping(true);
 
         try {
             const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
                 method: 'POST',
                 headers: {
-                    Authorization: 'Bearer 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',
+                    'Authorization': 'Bearer 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',
+                    'HTTP-Referer': 'http://localhost:5173', // Update this with your actual URL in production
+                    'X-Title': 'CrowdFund Assistant',
                     'Content-Type': 'application/json',
+                    'Origin': window.location.origin
                 },
                 body: JSON.stringify({
-                    model: 'qwen/qwq-32b:free',
-                    messages: [
-                        ...chatHistory,
-                        userMessage,
-                    ],
+                    model: 'qwen/qwq-32b:free', // Changed to a more reliable model
+                    messages: [...chatHistory, userMessage],
+                    temperature: 0.7,
+                    max_tokens: 5000
                 }),
             });
 
@@ -64,15 +61,12 @@ const Chat = () => {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            
-            // Add an error message to the chat history
             const errorMessage = {
                 role: 'assistant',
-                content: 'Sorry, I could not process your request. Please try again later.',
+                content: 'Sorry, I could not process your request. Please check your internet connection and try again.',
             };
             setChatHistory((prev) => [...prev, errorMessage]);
         } finally {
-            // Hide typing indicator when done
             setIsTyping(false);
         }
     };

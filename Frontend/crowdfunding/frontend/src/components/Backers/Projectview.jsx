@@ -10,8 +10,8 @@ import Updates from './Update';
 import Comments from './Comments';
 
 const ProjectView = () => {
-  const { projectId } = useParams(); // Get the project ID from the URL
-  const navigate = useNavigate(); // Add this hook
+  const { projectId } = useParams(); 
+  const navigate = useNavigate(); 
   const [project, setProject] = useState({
     id: '1',
     title: 'Untitled Project',
@@ -28,19 +28,9 @@ const ProjectView = () => {
   
   const [activeTab, setActiveTab] = useState('campaign');
   const [activeStorySection, setActiveStorySection] = useState(1);
-  
-  // Fetch project data based on projectId
   useEffect(() => {
-    // This is where you would fetch the project data from your API
-    // For now, we'll use a mock project
     const fetchProject = async () => {
       try {
-        // Replace this with your actual API call
-        // const response = await fetch(`/api/projects/${projectId}`);
-        // const data = await response.json();
-        // setProject(data);
-        
-        // Mock data for testing
         setProject({
           id: projectId,
           title: `Project ${projectId}`,
@@ -62,7 +52,6 @@ const ProjectView = () => {
     fetchProject();
   }, [projectId]);
   
-  // Calculate percentage with safeguards
   const percentFunded = project.fundingGoal > 0 ? (project.currentFunding / project.fundingGoal) * 100 : 0;
 
   const storySections = {
@@ -218,14 +207,12 @@ const ProjectView = () => {
         </motion.div>
       )
     },
-    // Add more sections following the same pattern...
+    
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
       <div className="relative">
-        {/* Background Image with Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent z-10" />
         <motion.div 
           className="relative h-[70vh] overflow-hidden"
@@ -239,8 +226,6 @@ const ProjectView = () => {
             className="w-full h-full object-cover"
           />
         </motion.div>
-
-        {/* Project Info Overlay */}
         <div className="absolute inset-0 z-20">
           <div className="max-w-6xl mx-auto px-4 h-full flex flex-col justify-center">
             <motion.div
@@ -262,8 +247,6 @@ const ProjectView = () => {
 
               <h1 className="text-5xl font-bold leading-tight">{project.title}</h1>
               <p className="text-xl text-gray-200">{project.description}</p>
-
-              {/* Creator Info */}
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
                   <img src="https://via.placeholder.com/48" alt="Creator" />
@@ -276,8 +259,6 @@ const ProjectView = () => {
             </motion.div>
           </div>
         </div>
-
-        {/* Funding Stats */}
         <motion.div 
           className="absolute bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md z-30"
           initial={{ y: 100, opacity: 0 }}
@@ -317,8 +298,6 @@ const ProjectView = () => {
                 </motion.button>
               </div>
             </div>
-
-            {/* Progress Bar */}
             <div className="mt-6">
               <motion.div 
                 className="w-full h-2 bg-gray-200 rounded-full overflow-hidden"
@@ -337,8 +316,6 @@ const ProjectView = () => {
           </div>
         </motion.div>
       </div>
-
-      {/* Navigation Tabs */}
       <div className="sticky top-0 bg-white shadow-md z-40">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex overflow-x-auto no-scrollbar">
@@ -375,11 +352,8 @@ const ProjectView = () => {
           </div>
         </div>
       </div>
-
-      {/* Main Content Section */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Content Column */}
           <div className="lg:col-span-2">
             {activeTab === 'campaign' && (
               <motion.div
@@ -388,7 +362,6 @@ const ProjectView = () => {
                 transition={{ duration: 0.5 }}
                 className="space-y-8"
               >
-                {/* Story Navigation */}
                 <div className="bg-white rounded-lg shadow-sm p-4">
                   <h2 className="text-2xl font-bold mb-4">Story</h2>
                   <div className="space-y-4">
@@ -417,8 +390,6 @@ const ProjectView = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* Main Story Content */}
                 <motion.div
                   className="bg-white rounded-lg shadow-sm p-6 space-y-6"
                   key={activeStorySection}
@@ -484,8 +455,6 @@ const ProjectView = () => {
               </motion.div>
             )}
           </div>
-
-          {/* Right Sidebar */}
           <motion.div
             className="lg:col-span-1"
             initial={{ opacity: 0, x: 20 }}
@@ -493,7 +462,6 @@ const ProjectView = () => {
             transition={{ delay: 0.6 }}
           >
             <div className="sticky top-24 space-y-6">
-              {/* Support Card */}
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <h3 className="text-xl font-bold mb-4">Support</h3>
                 <motion.button
@@ -504,8 +472,6 @@ const ProjectView = () => {
                   Make a pledge without a reward
                 </motion.button>
               </div>
-
-              {/* Creator Card */}
               <div className="bg-white rounded-lg shadow-sm p-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden">
@@ -529,8 +495,6 @@ const ProjectView = () => {
           </motion.div>
         </div>
       </div>
-
-      {/* Similar Projects Section */}
       <div className="bg-gray-50 py-12">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-between items-center mb-8">
@@ -549,7 +513,6 @@ const ProjectView = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Similar Project Card 1 */}
             <motion.div
               className="bg-white rounded-lg shadow-sm overflow-hidden"
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
@@ -590,8 +553,6 @@ const ProjectView = () => {
                 </div>
               </div>
             </motion.div>
-
-            {/* Similar Project Card 2 */}
             <motion.div
               className="bg-white rounded-lg shadow-sm overflow-hidden"
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
@@ -632,8 +593,6 @@ const ProjectView = () => {
                 </div>
               </div>
             </motion.div>
-
-            {/* Similar Project Card 3 */}
             <motion.div
               className="bg-white rounded-lg shadow-sm overflow-hidden"
               whileHover={{ y: -8, transition: { duration: 0.2 } }}
@@ -674,8 +633,6 @@ const ProjectView = () => {
                 </div>
               </div>
             </motion.div>
-
-            {/* Similar Project Card 4 */}
             <motion.div
               className="bg-white rounded-lg shadow-sm overflow-hidden"
               whileHover={{ y: -8, transition: { duration: 0.2 } }}

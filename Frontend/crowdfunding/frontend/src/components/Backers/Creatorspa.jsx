@@ -7,7 +7,7 @@ const Creatorspa = () => {
   const creatorInfo = {
     name: "Tyler Miles Lockett",
     username: "tyler miles lockett",
-    avatar: "https://via.placeholder.com/200", // Replace with actual creator image
+    avatar: "https://via.placeholder.com/200", 
     stats: {
       createdProjects: 1,
       backedProjects: 4,
@@ -31,8 +31,6 @@ const Creatorspa = () => {
         className="bg-white rounded-lg shadow-sm p-8"
       >
         <h1 className="text-3xl font-bold mb-8">About the creator</h1>
-
-        {/* Creator Profile Header */}
         <div className="flex items-start space-x-6 mb-8">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -56,8 +54,6 @@ const Creatorspa = () => {
             </div>
           </div>
         </div>
-
-        {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
           <div className="text-center">
             <h3 className="text-2xl font-bold">{creatorInfo.stats.createdProjects}</h3>
@@ -76,15 +72,11 @@ const Creatorspa = () => {
             <p className="text-gray-600">account created</p>
           </div>
         </div>
-
-        {/* Bio */}
         <div className="mb-8">
           <p className="text-gray-700 text-lg leading-relaxed">
             {creatorInfo.bio}
           </p>
         </div>
-
-        {/* Links and Location */}
         <div className="space-y-4">
           <div className="flex items-center space-x-2 text-gray-700">
             <FontAwesomeIcon icon={faLocationDot} />
@@ -108,8 +100,6 @@ const Creatorspa = () => {
             </a>
           </div>
         </div>
-
-        {/* Contact Buttons */}
         <div className="flex space-x-4 mt-8">
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -134,16 +124,12 @@ const Creatorspa = () => {
           </motion.button>
         </div>
       </motion.div>
-
-      {/* Projects Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         className="mt-8"
       >
-        
-        {/* Add your similar projects grid here */}
       </motion.div>
     </div>
   );

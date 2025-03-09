@@ -12,7 +12,7 @@ const Rewardssec = () => {
       message: "A \"Blessed by the patrons\" Thank you message for supporting the project.",
       backers: 1,
       estimatedDelivery: "Apr 2025",
-      image: "https://via.placeholder.com/600x400" // Replace with your actual image
+      image: "https://via.placeholder.com/600x400" 
     },
     {
       id: 2,

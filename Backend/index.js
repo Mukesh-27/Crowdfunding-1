@@ -1,20 +1,27 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const cors = require('cors');
 const app = express();
-const PORT = process.env.PORT || 5173;
+const PORT=3000;
 
-// Middleware
-app.use(cors()); // Enable CORS
-app.use(bodyParser.json()); // Parse JSON bodies
 
-// Basic route
+const creatorsRoute=require("./routes/creators");
+const backorsRoute=require("./routes/backers");
+
+app.use(cors());
+app.use(express.json()); 
+
+app.use(bodyParser.json());
+
+app.use("/creators",creatorsRoute);
+app.use("/backors",backorsRoute)
+
 app.get('/', (req, res) => {
-  res.send('Welcome to the Express server!');
+    res.json({ message: "API Base URL is working!" }); 
+  });
+  
+app.listen(PORT, () => {  
+    console.log(`Server is running on port ${PORT}`);
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports = app; 

@@ -16,8 +16,6 @@ const DiscoverPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const projectsPerPage = 6;
-
-  // Enhanced projects array with more diverse examples
   const projects = [
     {
       id: 1,
@@ -164,32 +162,22 @@ const DiscoverPage = () => {
       description: "Set of 5 unique hot sauces crafted with exotic peppers and spices."
     }
   ];
-
-  // Filter and search functionality
   useEffect(() => {
     let results = [...projects];
-
-    // Apply category filter
     if (filters.category !== 'all') {
       results = results.filter(project => 
         project.category.toLowerCase() === filters.category.toLowerCase()
       );
     }
-
-    // Apply status filter
     if (filters.status === 'active') {
       results = results.filter(project => project.daysLeft > 0);
     }
-
-    // Apply search query
     if (searchQuery) {
       results = results.filter(project =>
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-
-    // Apply sorting
     switch (filters.sort) {
       case 'newest':
         results.sort((a, b) => b.id - a.id);
@@ -200,27 +188,20 @@ const DiscoverPage = () => {
       case 'ending-soon':
         results.sort((a, b) => a.daysLeft - b.daysLeft);
         break;
-      default: // 'trending'
+      default: 
         results.sort((a, b) => (b.currentFunding / b.fundingGoal) - (a.currentFunding / a.fundingGoal));
     }
 
     setFilteredProjects(results);
   }, [filters, searchQuery]);
-
-  // Simulate loading delay
   const loadMoreProjects = useCallback(() => {
     setIsLoading(true);
-    // Simulate API call delay
     setTimeout(() => {
       setPage(prev => prev + 1);
       setIsLoading(false);
     }, 800);
   }, []);
-
-  // Get paginated projects
   const paginatedProjects = filteredProjects.slice(0, page * projectsPerPage);
-
-  // Intersection Observer for infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -242,13 +223,10 @@ const DiscoverPage = () => {
   return (
     <div className="pt-14 min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Main Content */}
         <div className="space-y-4">
-          {/* Filters Section */}
           <div className="sticky top-14 z-30 bg-gradient-to-b from-gray-50 pt-3 pb-4">
             <div className="bg-white rounded-lg shadow-sm p-3">
               <div className="flex items-center gap-4 flex-wrap md:flex-nowrap">
-                {/* Search Bar */}
                 <div className="relative w-full md:w-64 flex-shrink-0">
                   <input
                     type="text"
@@ -261,22 +239,14 @@ const DiscoverPage = () => {
                     <i className="fas fa-search text-gray-400"></i>
                   </div>
                 </div>
-
-                {/* Vertical Divider */}
                 <div className="hidden md:block h-8 w-px bg-gray-200"></div>
-
-                {/* Filters */}
                 <div className="flex items-center gap-4 flex-1">
                   <FilterBar 
                     filters={filters} 
                     setFilters={setFilters} 
                   />
                 </div>
-
-                {/* Vertical Divider */}
                 <div className="hidden md:block h-8 w-px bg-gray-200"></div>
-
-                {/* View Toggle */}
                 <div className="flex-shrink-0">
                   <SearchResults 
                     totalProjects={filteredProjects.length} 
@@ -287,8 +257,6 @@ const DiscoverPage = () => {
               </div>
             </div>
           </div>
-
-          {/* Hero Section */}
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
               Discover Amazing Projects
@@ -297,8 +265,6 @@ const DiscoverPage = () => {
               Find and support innovative projects that are shaping the future.
             </p>
           </div>
-
-          {/* Projects Grid/List with Smooth Animations */}
           <AnimatePresence mode="wait">
             <motion.div
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6`}
@@ -314,8 +280,6 @@ const DiscoverPage = () => {
               ))}
             </motion.div>
           </AnimatePresence>
-
-          {/* Loading State */}
           {isLoading && (
             <div className="flex justify-center py-8">
               <div className="loader">
@@ -323,8 +287,6 @@ const DiscoverPage = () => {
               </div>
             </div>
           )}
-
-          {/* Load More Trigger for Infinite Scroll */}
           {paginatedProjects.length < filteredProjects.length && (
             <div 
               id="load-more-trigger" 
@@ -344,8 +306,6 @@ const DiscoverPage = () => {
               </button>
             </div>
           )}
-
-          {/* No Results Message with Animation */}
           <AnimatePresence>
             {filteredProjects.length === 0 && (
               <motion.div 

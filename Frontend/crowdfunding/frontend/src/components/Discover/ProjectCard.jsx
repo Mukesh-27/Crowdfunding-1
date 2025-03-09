@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 
 const ProjectCard = ({ project = {} }) => {
   const navigate = useNavigate();
-  
-  // Destructure project with default values to prevent undefined errors
   const {
     id = '1',
     title = 'Untitled Project',
@@ -15,19 +13,17 @@ const ProjectCard = ({ project = {} }) => {
     fundingGoal = 100,
     daysLeft = 0
   } = project;
-  
-  // Calculate percentage with safeguards
   const percentFunded = fundingGoal > 0 ? (currentFunding / fundingGoal) * 100 : 0;
 
   const handleCardClick = () => {
-    navigate(`/project/${id}`); // Navigate to ProjectDetails with project ID
+    navigate(`/project/${id}`); 
   };
 
   return (
     <motion.div
       className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 cursor-pointer"
       whileHover={{ scale: 1.05 }}
-      onClick={handleCardClick} // Handle click to navigate
+      onClick={handleCardClick} 
     >
       <img 
         src={image} 
